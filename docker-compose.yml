@@ -1,0 +1,23 @@
+# use root/example as usr/psswd cred
+version: '3'
+
+services:
+    db:
+        build: .
+        image: cbalusek/mdb_db
+        restart: always
+        env_file: 
+         - ./.env
+        ports:
+         - '14330:1433'
+        volumes:
+         - 'db_data:/data'
+         - ''
+volumes:
+    db_data:
+
+#        adminer:
+#                image: adminer
+#                restart: always
+#                ports:
+#                        -8080:8080

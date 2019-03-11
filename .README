@@ -1,0 +1,20 @@
+For setting up the MsSQL server, you can run the docker compose file to spin up the mdb_db.
+However, the primary concern is that there is no persistent volume.
+So, we can create a docker volume container to hold this information in the interim.
+
+We can add this volume to our docker-compose file as 
+'''
+  sdc:
+    volumes:
+      - 'db_data:/data'
+
+  volumes:
+    - db_data:
+'''
+This will create a virtual volume on the docker MobyLinuxVM whhich will be maintained by Docker.
+You can bind directly to the local machine as well but this is not advised.
+
+The bigger idea then becomes what are you attempting to do?  A volume can have permissions changed to RW or R-only.
+This can be immensely beneficial for something like a database which needs RW capability but R-only for things accessing the database.
+
+
